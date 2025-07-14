@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Quiz Dashboard</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f2f4f7;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .dashboard {
+      max-width: 500px;
+      margin: 30px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+    }
+    .stat {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+    }
+    .label {
+      font-weight: bold;
+    }
+    .value {
+      color: #007bff;
+    }
+    .actions {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 16px;
+      font-size: 16px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>My Quiz Dashboard</h1>
+   <nav>
+      <a href="HOME.html"><</a>
+
+  <div class="dashboard">
+    <div class="stat">
+      <span class="label">Attempts:</span>
+      <span class="value" id="attempts">0</span>
+    </div>
+    <div class="stat">
+      <span class="label">Last Time Taken:</span>
+      <span class="value" id="time">-</span>
+    </div>
+    <div class="stat">
+      <span class="label">Last Score:</span>
+      <span class="value" id="score">-</span>
+    </div>
+    <div class="stat">
+      <span class="label">Last Result:</span>
+      <span class="value" id="result">-</span>
+    </div>
+
+    <div class="actions">
+      <button onclick="simulateQuiz()">Take Quiz</button>
+      <button onclick="clearStats()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    // Load saved data
+    function loadStats() {
+      document.getElementById('attempts').textContent = localStorage.getItem('user_attempts') || 0;
+      document.getElementById('time').textContent = localStorage.getItem('user_time') || '-';
+      document.getElementById('score').textContent = localStorage.getItem('user_score') || '-';
+      document.getElementById('result').textContent = localStorage.getItem('user_result') || '-';
+    }
+
+    // Simulate a quiz submission
+    function simulateQuiz() {
+      const attempts = parseInt(localStorage.getItem('user_attempts') || '0') + 1;
+      const time = `${Math.floor(Math.random() * 10 + 1)} mins`;
+      const score = Math.floor(Math.random() * 101); // 0 to 100
+      const result = score >= 50 ? 'Pass' : 'Fail';
+
+      localStorage.setItem('user_attempts', attempts);
+      localStorage.setItem('user_time', time);
+      localStorage.setItem('user_score', score);
+      localStorage.setItem('user_result', result);
+
+      loadStats();
+    }
+
+    // Clear local data
+    function clearStats() {
+      localStorage.removeItem('user_attempts');
+      localStorage.removeItem('user_time');
+      localStorage.removeItem('user_score');
+      localStorage.removeItem('user_result');
+      loadStats();
+    }
+
+    window.onload = loadStats;
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Quiz</h1>
+    <div id="quiz-container">
+      <!-- Questions will be dynamically inserted here -->
+    </div>
+    <button id="next-btn" onclick="submitAnswer()">Next</button>
+  </div>
+
+  <script>
+    let currentQuestionIndex = 0;
+    let selectedAnswer = null;
+    let quizData = [];
+
+    // Fetch quiz questions from the server
+    fetch('/api/questions')
+      .then(response => response.json())
+      .then(data => {
+        quizData = data;
+        showQuestion(currentQuestionIndex);
+      });
+
+    function showQuestion(index) {
+      const question = quizData[index];
+      const quizContainer = document.getElementById('quiz-container');
+
+      quizContainer.innerHTML = `
+        <h2>${question.question}</h2>
+        ${question.options.map((option, i) => `
+          <label>
+            <input type="radio" name="answer" value="${i}" onclick="selectAnswer(${i})" />
+            ${option}
+          </label>
+        `).join('<br/>')}
+      `;
+
+      // Disable next button if no answer is selected
+      document.getElementById('next-btn').disabled = selectedAnswer === null;
+    }
+
+    function selectAnswer(answerIndex) {
+      selectedAnswer = answerIndex;
+    }
+
+    function submitAnswer() {
+      if (selectedAnswer !== null) {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+          showQuestion(currentQuestionIndex);
+        } else {
+          window.location.href = '/results';
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

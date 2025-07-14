@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+    }
+    .container {
+      background: white;
+      display: flex;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    .left-panel {
+      background: #0d47a1;
+      color: white;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .left-panel h2 {
+      margin-bottom: 20px;
+    }
+    .right-panel {
+      padding: 40px;
+      max-width: 500px;
+    }
+    .right-panel h2 {
+      margin-bottom: 20px;
+    }
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    input, select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    }
+    .full-width {
+      grid-column: span 2;
+    }
+    .gender-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #0d47a1;
+      color: white;
+      cursor: pointer;
+    }
+    .switch-button {
+      background: #42a5f5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left-panel">
+      <h2>Welcome</h2>
+      <p>GROW UP</p>
+      <button>Registration</button>
+    </div>
+    <div class="right-panel">
+      <div class="button-group">
+        <button class="switch-button">DASHBOARD</button>
+        <button class="switch-button"><a href="HOME.html">HOME</button></a>
+      </div>
+      <h2>Register form</h2>
+      <form>
+        <input type="text" placeholder="First Name" required>
+        <input type="text" placeholder="Last Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <input type="tel" placeholder="Your Phone" required>
+         <input type="date"id="dob"name="dob" place holder="DOB">
+         <input type="text" id="subject" placeholder="Enter subject" required>
+        <select required>
+          <option value="">Select your Security Question</option>
+          <option value="pet">What is your pet's name?</option>
+          <option value="school">What is your first school's name?</option>
+        </select>
+        <input type="text" placeholder="Enter Your Answer" required>
+        <div class="gender-group full-width">
+          <label><input type="radio" name="gender" value="male"> Male</label>
+          <label><input type="radio" name="gender" value="female"> Female</label>
+        </div>
+        <div class="full-width">
+          <button type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
